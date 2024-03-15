@@ -6,12 +6,12 @@ double norm(Array2D x){
     return x[0]*x[0] + x[1]*x[1];
 }
 
-Array2D operator + (double const a, Array2D const x){
-    return {a+x[0],a+x[1]};
-}
-Array2D operator - (double const a, Array2D const x){
-    return {a-x[0],a-x[1]};
-}
+// Array2D operator + (double const a, Array2D const x){
+//     return {a+x[0],a+x[1]};
+// }
+// Array2D operator - (double const a, Array2D const x){
+//     return {a-x[0],a-x[1]};
+// }
 Array2D operator * (double const a, Array2D const x){
     return {a*x[0],a*x[1]};
 }
