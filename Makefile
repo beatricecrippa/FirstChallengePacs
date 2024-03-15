@@ -3,7 +3,7 @@ CXXFLAGS ?= -std=c++20
 CPPFLAGS ?= -O3 -Wall -I. -Wno-conversion-null -Wno-deprecated-declarations -I../../pacs-examples/Examples/include
 
 
-EXEC = mainMJ
+EXEC = main
 LDFLAGS ?= -L../../pacs-examples/Examples/lib
 LIBS  ?= -lmuparser
 
