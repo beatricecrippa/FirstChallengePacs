@@ -1,5 +1,9 @@
+#ifndef FUN_MUPARSER
+#define FUN_MUPARSER
+
 #include <muParser.h>
 
+#include <vector>
 #include <memory>
 #include <string>
 
@@ -9,14 +13,20 @@ public:
   MuparserFun(const MuparserFun &m)
     : m_parser(m.m_parser)
   {
-    m_parser.DefineVar("x", &m_var);
+    m_var.resize(m.m_var.size());
+    for(size_t i=0;i<m_var.size();++i){
+        m_parser.DefineVar("x"+std::to_string(i+1), &m_var[i]);
+    }
   };
 
-  MuparserFun(const std::string &s)
+  MuparserFun(const std::string &s, size_t size)
   {
+    m_var.resize(size);
     try
       {
-        m_parser.DefineVar("x", &m_var);
+        for(size_t i=0;i<size;++i){
+          m_parser.DefineVar("x"+std::to_string(i+1), &m_var[i]);
+        }
         m_parser.SetExpr(s);
       }
     catch (mu::Parser::exception_type &e)
@@ -26,14 +36,16 @@ public:
   };
 
   double
-  operator()(const double &x)
+  operator()(const std::vector<double> &x)
   {
-    m_var = x;
+    std::copy(x.begin(), x.end(), m_var.begin());
     double y = m_parser.Eval();
     return y;
   };
 
 private:
-  double     m_var;
+  std::vector<double> m_var;
   mu::Parser m_parser;
 };
+
+#endif // FUN_MUPARSER

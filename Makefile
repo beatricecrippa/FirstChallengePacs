@@ -10,7 +10,7 @@ LIBS  ?= -lmuparser
 
 all: $(EXEC)
 
-%.o: %.cpp
+%.o: %.cpp 
 	$(CXX) -c $(CPPFLAGS) $(CXXFLAGS) $<
 
 $(EXEC): %: %.o
