@@ -10,4 +10,6 @@
 
 std::vector<double> GradientDescent(const Data & data);
 
+std::vector<double> Adam(const Data & data);
+
 #endif // GRADIENTD_H

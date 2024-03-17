@@ -39,9 +39,8 @@ std::vector<double> GradientDescent(const Data & data){
         std::vector<double> xk1(xk.size());
         double a=Alphas[method](it);
         //std::cout<<a<<std::endl;
-        std::vector<double> DF=dfun(xk);
 
-        xk1=xk-(a*DF);
+        xk1=xk-(a*dfun(xk));
         
         if(it > max_it or norm(xk-xk1)<tol_x or norm(dfun(xk)) < tol_df)
             converged=true;
