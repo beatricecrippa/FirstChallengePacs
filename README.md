@@ -1,6 +1,6 @@
 # FirstChallengePacs
 
-# Gradient-Based Optimization in C++ for minimum problem
+## Gradient-Based Optimization in C++ for minimum problem
 
 This is the repository for the first assignement of the APSC course.
 The C++ program implements gradient-based optimization algorithms such as gradient descent, Adam, and Heavy Ball. The program reads input parameters from a JSON file, performs optimization based on the specified method, and outputs the final result.
