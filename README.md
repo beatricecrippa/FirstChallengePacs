@@ -1,14 +1,70 @@
 # FirstChallengePacs
 
+# Gradient-Based Optimization in C++ for minimum problem
+
 This is the repository for the first assignement of the APSC course.
-Student: Simone Paloschi.
+The C++ program implements gradient-based optimization algorithms such as gradient descent, Adam, and Heavy Ball. The program reads input parameters from a JSON file, performs optimization based on the specified method, and outputs the final result.
 
 
-Dovete cambiare il path per le librerie.
-giustifica che le funzioni sono scelte a runtime e non a compile time.
+## Features
+
+- Supports gradient descent, Adam, and Heavy Ball optimization methods.
+- Input parameters are read from a JSON file for flexibility and ease of use.
+- Implements finite differences for gradient computation if specified in the input file.
+- Provides options for different step size update strategies, including fixed step size, exponential decay, and Armijo rule.
+
+## Requirements
+
+- C++ compiler with C++11 support.
+- [JSON for Modern C++](https://github.com/nlohmann/json) library for parsing JSON files.
+- [muParser](https://beltoforion.de/article.php?a=muparser) library for parsing mathematical expressions and computing derivatives.
+
+## Usage
+
+1. Clone the repository:
+
+```
+git clone https://github.com/Palpal16/FirstChallengePacs
+```
+
+2. Modify the variable LIB_ROOT in the Makefile
+
+3. Modify the file data.json with parameters of your choice
+
+4. Compile and run the program
 
 
-To choose the leraning rate decay method, change the value "lerningRate" in the following way:
-Exponential decay = 0. Inverse decay = 1. Armijo rule = 2.
+```
+make
+./main
+```
+
+## The program
+The aim of this is program is to be able to run tests with different methods with only one compilation.
+This will increase the run time, but it avoids having to compile again for different tests.
+
+To implement the function and the gradient I used the muParser library, since it's slighly more efficient than the muParserX and I didn't need the enhancements of the latter library.
+
+Inside Data.hpp you can find the code that reads data from the json file and a few smaller functions. Instead in the main there are the three approximation methods.
 
 
+## Parameters
+To tune the program and run different tests you can modify the following variables:
+
+1. Choose the minimization algorithm
+"learningMethod" should be set as 0 for gradient descent, 1 for Adam method and 2 for heavy ball method.
+If using Adam or heavy ball remember to set the respective hyperparameters:
+"gamma1AD", "gamma2AD", "epsilonAD": 1e-8 or "etaHB": 0.01.
+
+
+2. Choose the learning decay method
+"alphaMethod": Fixed learning = 0, Exponential decay = 1, Inverse decay = 2, Armijo rule = 3.
+Remember not to use Armijo rule for heavy ball and Adam methods.
+Also set the starting value of the learning rate "alpha0" and the "decayParameter", this is usually referred to as mu for exponential deacy and sigma for Armijo rule.
+
+3. Choose the gradient evaluation technique
+For FD set "finiteDifferences" to 1, instead for the exact gradient set it to any other integer.
+If using the finite difference scheme, you should select an appropriate step h and set it in "hFD"
+
+4. General parameters
+Starting point = "initial". Maximum number of iterations = "max_it". tolerance w.r.t. x and to the gradient = "tol_x" and "tol_df". The function to be minimized and its gradient = "fun" and "dfun".
