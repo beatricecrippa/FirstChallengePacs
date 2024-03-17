@@ -3,16 +3,11 @@
 
 #include "muparser_fun.hpp"
 #include "muparser_dfun.hpp"
-#include <vector>
+#include "Data.hpp"
 
-std::vector<double> GradientDescent(const std::vector<double>& initial_x, 
-                                    const unsigned int max_it, 
-                                    const double tol_df, 
-                                    const double tol_x, 
-                                    MuparserFun fun, 
-                                    MuparserDfun dfun,
-                                    const double a0,
-                                    const double mu,
-                                    const int method);
+#include <vector>
+#include <functional>
+
+std::vector<double> GradientDescent(const Data & data);
 
 #endif // GRADIENTD_H

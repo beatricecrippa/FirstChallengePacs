@@ -1,11 +1,13 @@
 {
     "initial" : [0,0],
     "max_it" : 1000,
-    "tol_df" : 1e-6,
     "tol_x" : 1e-6,
+    "tol_df" : 1e-6,
     "fun" : "x1*x2+ 4*x1^4+ x2^2 +3*x1",
     "dfun" : ["x2+ 16*x1^3 +3","x1+ 2*x2"],
     "alpha0" : 0.1,
     "decayParameter" : 0.1,
-    "learningMethod": 2
+    "learningMethod": 2,
+    "finiteDifferences": 0,
+    "h": 1e-5
 }

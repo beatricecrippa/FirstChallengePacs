@@ -5,7 +5,10 @@ Student: Simone Paloschi.
 
 
 Dovete cambiare il path per le librerie.
+giustifica che le funzioni sono scelte a runtime e non a compile time.
 
 
 To choose the leraning rate decay method, change the value "lerningRate" in the following way:
 Exponential decay = 0. Inverse decay = 1. Armijo rule = 2.
+
+
