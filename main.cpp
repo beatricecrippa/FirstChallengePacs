@@ -21,19 +21,25 @@ int main(){
     // Choose optimization method based on input
     if(data.method==0){
         Method = GradientDescent;
+        std::cout<<"Using gradient descent."<<std::endl;
     } else if(data.method==1){
         Method = Adam;
+        std::cout<<"Using Adam approximation."<<std::endl;
     } else if(data.method==2){
         Method = HeavyBall;
+        std::cout<<"Using heavy ball approximation."<<std::endl;
     } else {
-        std::cerr << "Invalid choice of learningMetod, insert a value between 0 and 2" << std::endl;
+        std::cerr << "\n\nInvalid choice of learningMetod, insert a value between 0 and 2.\n\n" << std::endl;
     }
+    std::cout << "----------------------------------"<< std::endl;
 
     // Perform optimization
     std::vector<double> final_x = Method(data);
 
     // Output final result
-    std::cout << final_x[0] << " " << final_x[1] << std::endl;
+    std::cout << "[" << final_x[0] << "," << final_x[1] << "]"<< std::endl;
+    std::cout << "Value in this point is f(min_x)=" << data.fun(final_x) << std::endl;
+    std::cout << "----------------------------------"<< std::endl;
 
     return 0;
 }
@@ -52,11 +58,11 @@ std::vector<double> GradientDescent(const Data & data){
         
         if(norm(xk-xk1)< data.tol_x or norm(data.Grad(xk)) < data.tol_df){
             converged=true;
-            std::cout << "Gradient descent converged in " << it << " iterations to: ";
+            std::cout << "Method converged in " << it << " iterations to: ";
         }
     }
     if(!converged){
-        std::cout << "Gradient descent didn't converge in " << data.max_it << " iterations, final approximation: ";
+        std::cout << "Not converged in " << data.max_it << " iterations, final approximation: ";
     }
 
     return xk1;
@@ -87,11 +93,11 @@ std::vector<double> Adam(const Data & data){
 
         if(norm(xk-xk1)<data.tol_x or norm(data.Grad(xk)) < data.tol_df){
             converged=true;
-            std::cout << "Adam method converged in " << t << " iterations to: ";
+            std::cout << "Method converged in " << t << " iterations to: ";
         }
     }
     if(!converged){
-        std::cout << "Adam method didn't converge in " << data.max_it << " iterations, final approximation: ";
+        std::cout << "Not converged in " << data.max_it << " iterations, final approximation: ";
     }
     return xk1;
 
@@ -110,11 +116,11 @@ std::vector<double> HeavyBall(const Data & data){
 
         if(norm(xk-xk1)<data.tol_x or norm(data.Grad(xk)) < data.tol_df){
             converged=true;
-            std::cout << "Heavy ball method converged in " << t << " iterations to: ";
+            std::cout << "Method converged in " << t << " iterations to: ";
         }
     }
     if(!converged){
-        std::cout << "Heavy ball method didn't converge in " << data.max_it << " iterations, final approximation: ";
+        std::cout << "Not converged in " << data.max_it << " iterations, final approximation: ";
     }
     return xk1;
 }

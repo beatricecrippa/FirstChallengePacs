@@ -7,15 +7,15 @@
     "dfun" : ["x2+ 16*x1^3 +3","x1+ 2*x2"],
 
     "alpha0" : 0.1,
-    "decayParameter" : 0.01,
-    "alphaMethod": 0,
+    "decayParameter" : 0.1,
+    "alphaMethod": 1,
 
-    "finiteDifferences": 0,
+    "finiteDifferences": 1,
     "hFD": 1e-5,
     
-    "learningMethod": 0,
+    "learningMethod": 2,
     "gamma1AD": 0.9,
     "gamma2AD": 0.999,
     "epsilonAD": 1e-8,
-    "etaHB": 0.01
+    "etaHB": 0.9
 }

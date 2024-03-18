@@ -64,15 +64,22 @@ struct Data{
         fun = muFun;
         MuparserDfun dfun(dfunVstring, x0.size());
 
+
+        // Printing the methods chosen:
+        std::cout << "----------------------------------"<< std::endl;
+        std::cout<<"Evaluating the gradient ";
+
+
         // Checking if finite differences should be used for gradient computation
         int finiteDifferences = data.value("finiteDifferences", 0);
         double h = data.value("hFD", 1e-5);
         if(finiteDifferences==1){
             Grad=[h, this](std::vector<double> x){ return GradientFD(x, h,fun);};
-            std::cout<<"Using finite differences for Gradient evaluation"<<std::endl;
+            std::cout<<"with central finite differences."<<std::endl;
         }
         else{
             Grad = dfun;
+            std::cout<<"with the exact function."<<std::endl;
         }
 
         // Initializing step size function based on chosen method
@@ -80,18 +87,25 @@ struct Data{
         double mu = data.value("decayParameter", 0.1);
         int alphaMethod = data.value("alphaMethod", 0);
 
+        std::cout<<"Setting the learning rate ";
+
         if (alphaMethod == 0) {
             Alpha=[a0](const unsigned int k, std::vector<double> x){ return a0;};
+            std::cout<<"with constant value."<<std::endl;
         } else if (alphaMethod == 1) {
             Alpha = [a0,mu](const unsigned int k, std::vector<double> x){ return a0*std::exp(-mu*k);};
+            std::cout<<"with exponential decay."<<std::endl;
         } else if (alphaMethod == 2) {
             Alpha = [a0,mu](const unsigned int k, std::vector<double> x){ return a0/(1+mu*k);};
+            std::cout<<"with inverse decay."<<std::endl;
         } else if (alphaMethod == 3) {
             Alpha = [a0,mu,this](const unsigned int k, std::vector<double> x){ return Armijo(a0,mu,k,x,fun,Grad);};
-            if(method==2 or method==3)
-                std::cerr << "Cannot use Armijo method with Heavy ball and Adam, please change method." << std::endl;
+            if(method==1 or method==2)
+                std::cerr << "\n\nCannot use Armijo rule with Heavy ball and Adam, please change method.\n\n" << std::endl;
+            else
+                std::cout<<"with Armijo rule."<<std::endl;
         } else {
-            std::cerr << "Invalid choice of alphaMetod, insert a value between 0 and 3" << std::endl;
+            std::cerr << "\n\nInvalid choice of alphaMetod, insert a value between 0 and 3.\n\n" << std::endl;
         }
     }
 
