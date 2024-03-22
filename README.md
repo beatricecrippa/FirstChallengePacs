@@ -27,7 +27,7 @@ The C++ program implements gradient-based optimization algorithms such as gradie
 git clone git@github.com:Palpal16/FirstChallengePacs.git
 ```
 
-2. Modify the variable LIB_ROOT in the Makefile
+2. Modify the variable L_ROOT in the Makefile
 
 3. Modify the file data.json with parameters of your choice
 
