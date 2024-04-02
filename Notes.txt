@@ -1,0 +1,9 @@
+Good use of GitHub, README is clear and complete.
+
+Avoid implementing all the functions in the main.cpp file.
+You could also separate the definition of the Data struct and the definition of all the functions for vector operations and computation of the learning rate and numerical gradient.
+The implementation of the methods of classes should be done outside, to improve readability of the code.
+
+Rely on methods of the std library to implement operations between vectors.
+Avoid using std::pow and rely on other implementations, as seen in the labs.
+
